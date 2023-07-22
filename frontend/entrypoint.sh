@@ -17,6 +17,11 @@ do
 done < /packages.txt
 
 case "$STATUS" in
+  "installation")
+    echo Starting in installation mode...
+    bash
+    echo RUN yarn create next-app . --typescript
+    ;;
   "development")
     echo Starting in developer mode...
     yarn dev
