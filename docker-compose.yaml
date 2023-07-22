@@ -8,8 +8,8 @@ services:
     hostname: frontend
     tty: true
     environment:
-      - WATCHPACK_POLLING=true
-      - STATUS=development
+      WATCHPACK_POLLING: true
+      STATUS: "development"
     ports:
       - 3000:3000
     volumes:
