@@ -1,0 +1,16 @@
+version: "3"
+services:
+  frontend:
+    build:      
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    container_name: frontend
+    hostname: frontend
+    tty: true
+    environment:
+      - WATCHPACK_POLLING=true
+      - STATUS=development
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/app:/usr/src/app
