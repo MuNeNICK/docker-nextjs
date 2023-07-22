@@ -5,7 +5,6 @@ cd /usr/src/app
 if grep next package.json >/dev/null; then
     echo Next is EXIST.
 else
-    cd /usr/src/app
     yarn create next-app . --typescript --eslint
 fi
 
