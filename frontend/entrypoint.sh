@@ -2,15 +2,13 @@
 
 cd /usr/src/app
 
-if grep next package.json >/dev/null; then
-    echo Next is EXIST.
-else
+if [ ! -d "node_modules" ]; then
     yarn create next-app . --typescript --eslint
 fi
 
 while read line
 do
-  if grep "$line" package.json >/dev/null; then
+  if yarn list --pattern "$line" > /dev/null; then
     echo $line is EXIST.
   else
     echo $line is NOT EXIST.
@@ -18,14 +16,17 @@ do
   fi
 done < /packages.txt
 
-
-if [ "$STATUS" == "development" ]; then
-  echo Starting in developer mode...
-  yarn dev
-elif [ "$STATUS" == "production" ]; then
-  echo Starting in production mode...
-  yarn build
-  yarn start
-else 
-  echo Incorrect environment variable.
-fi
+case "$STATUS" in
+  "development")
+    echo Starting in developer mode...
+    yarn dev
+    ;;
+  "production")
+    echo Starting in production mode...
+    yarn build
+    yarn start
+    ;;
+  *)
+    echo Incorrect environment variable.
+    ;;
+esac
